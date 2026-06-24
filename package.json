@@ -1,0 +1,47 @@
+{
+  "name": "public-product-website",
+  "version": "1.0.0",
+  "description": "Root workspace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "lint:frontend": "npm run lint --prefix frontend",
+    "lint:backend": "npm run lint --prefix backend",
+    "lint:all": "npm run lint:frontend && npm run lint:backend",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bighneswar-mindfire/public-product-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bighneswar-mindfire/public-product-website/issues"
+  },
+  "homepage": "https://github.com/bighneswar-mindfire/public-product-website#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^21.1.0",
+    "@commitlint/config-conventional": "^21.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.8.4"
+  },
+  "lint-staged": {
+    "frontend/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint --prefix frontend",
+      "prettier --write"
+    ],
+    "backend/**/*.{ts,tsx,js,jsx}": [
+      "npm run lint --prefix backend",
+      "prettier --write"
+    ],
+    "*.{json,md,css}": [
+      "prettier --write"
+    ]
+  }
+}

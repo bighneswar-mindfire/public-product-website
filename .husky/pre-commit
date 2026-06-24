@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# run secret scanner if gitleaks is installed locally
+if command -v gitleaks >/dev/null 2>&1; then
+  echo "Running Gitleaks check..."
+  gitleaks protect --staged --verbose
+  if [ $? -ne 0 ]; then
+    echo "Gitleaks detected potential secrets. Commit aborted."
+    exit 1
+  fi
+else
+  echo "Warning: Gitleaks is not installed locally. Skipping pre-commit secret scan."
+fi
+
+#run linting & formatting
+npx lint-staged
