@@ -27,17 +27,18 @@
   "devDependencies": {
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
+    "eslint": "^9.39.4",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "prettier": "^3.8.4"
   },
   "lint-staged": {
     "frontend/**/*.{ts,tsx,js,jsx}": [
-      "npm run lint --prefix frontend",
+      "eslint --config frontend/eslint.config.mjs",
       "prettier --write"
     ],
     "backend/**/*.{ts,tsx,js,jsx}": [
-      "npm run lint --prefix backend",
+      "eslint --config backend/eslint.config.mjs",
       "prettier --write"
     ],
     "*.{json,md,css}": [
