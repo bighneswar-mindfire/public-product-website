@@ -56,6 +56,26 @@ const fallbackCMS = {
       features: ["Unlimited Members", "Isolated Cluster Deployments", "1 Solutions Architect"],
     },
   ],
+  blogPosts: [
+    {
+      title: "Understanding Serverless Latency in Modern Edge Computing",
+      slug: "understanding-serverless-latency",
+      description:
+        "How cold starts manifest in modern serverless ecosystems and architectural patterns to mitigate them.",
+      date: "2026-06-15",
+      content:
+        "Modern serverless architectures require zero cold starts to be viable for low-latency web applications...",
+    },
+    {
+      title: "How We Scaled Our Log Analytics Engine to 1B Requests",
+      slug: "scaling-log-analytics-engine",
+      description:
+        "An architectural deep-dive into standard message queues and storage layouts that powered our latest upgrade.",
+      date: "2026-05-28",
+      content:
+        "Building high-performance analytics engines requires moving from classic Relational database structures to structured Columnar storage...",
+    },
+  ],
 };
 
 function normalizeStrapiData<T>(payload: unknown): T {
