@@ -1,5 +1,7 @@
 import { fetchFromStrapi } from "@/lib/strapi";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
+import { LiveStats } from "@/components/LiveStats";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import Link from "next/link";
 
 export const revalidate = 3600;
@@ -16,6 +18,7 @@ export default async function LandingPage() {
 
   return (
     <section className="space-y-16 py-12">
+      {/*rendering indicator */}
       <RenderingIndicator type="ISR" source="CMS" />
 
       {/* Hero Section */}
@@ -27,15 +30,26 @@ export default async function LandingPage() {
         <div>
           <Link
             href="/login"
-            className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10"
+            className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10 cursor-pointer"
           >
             {cmsData.ctaText}
           </Link>
         </div>
       </div>
 
+      {/* Live Stats Section */}
+      <div className="border-y border-slate-900/60 py-10 space-y-6">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-slate-100">Real-Time Platform Telemetry</h2>
+          <p className="text-slate-400 text-sm mt-1">
+            Live metrics parsed directly from our system API endpoints.
+          </p>
+        </div>
+        <LiveStats />
+      </div>
+
       {/* Use Cases Section */}
-      <div className="max-w-4xl mx-auto space-y-8 pt-12">
+      <div className="max-w-4xl mx-auto space-y-8 pt-6">
         <h2 className="text-2xl font-bold text-center text-slate-100">
           Built for Modern Engineering Models
         </h2>
@@ -50,6 +64,11 @@ export default async function LandingPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Newsletter Section */}
+      <div className="border-t border-slate-900/60 pt-12">
+        <NewsletterForm />
       </div>
     </section>
   );

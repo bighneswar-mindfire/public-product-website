@@ -8,12 +8,10 @@ export async function GET() {
     const subscribers = db.getSubscribers();
 
     return NextResponse.json({
-      totalSubscribers: subscribers.length,
-      activeDeployments: 1240,
-      uptimePercent: 99.99,
+      totalUsers: subscribers.length,
     });
   } catch (error) {
-    console.error("Failed to fetch system statistics:", error);
+    console.error("Failed to fetch dynamic platform stats:", error);
     return NextResponse.json(
       { error: "Internal server error occurred while retrieving platform telemetry." },
       { status: 500 }
