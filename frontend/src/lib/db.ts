@@ -1,7 +1,6 @@
 // frontend/src/lib/db.ts
 
 declare global {
-  // eslint-disable-next-line no-var
   var subscribers: string[];
 }
 
