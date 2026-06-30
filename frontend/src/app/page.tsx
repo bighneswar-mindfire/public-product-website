@@ -2,7 +2,7 @@ import { fetchFromStrapi } from "@/lib/strapi";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
 import Link from "next/link";
 
-export const revalidate = 3600; // validate every hour
+export const revalidate = 3600;
 
 interface LandingData {
   heroTitle: string;
