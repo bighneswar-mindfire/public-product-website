@@ -1,4 +1,3 @@
-// frontend/src/components/Header.tsx
 "use client";
 
 import Link from "next/link";
@@ -37,18 +36,21 @@ export function Header() {
             <Link href="/blog" className="hover:text-emerald-400 transition">
               Blog
             </Link>
+
+            {user && (
+              <Link
+                href="/dashboard"
+                className="text-slate-350 hover:text-emerald-400 transition font-medium"
+              >
+                Dashboard
+              </Link>
+            )}
           </nav>
         </div>
 
         <div className="flex items-center gap-4 text-sm">
           {user ? (
             <>
-              <Link
-                href="/dashboard"
-                className="text-slate-300 hover:text-emerald-400 transition font-medium"
-              >
-                Dashboard
-              </Link>
               <button
                 onClick={handleLogout}
                 className="bg-slate-800 text-slate-100 px-3 py-1.5 rounded hover:bg-slate-700 transition cursor-pointer"

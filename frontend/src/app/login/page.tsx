@@ -22,16 +22,28 @@ export default function LoginPage() {
     setError("");
 
     try {
-      if (isRegister) {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
+      const userCredential = isRegister
+        ? await createUserWithEmailAndPassword(auth, email, password)
+        : await signInWithEmailAndPassword(auth, email, password);
 
-      setTimeout(() => {
+      const currentUser = userCredential.user;
+
+      if (currentUser && currentUser.email) {
+        const sessionRes = await fetch("/api/auth/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: currentUser.email, uid: currentUser.uid }),
+        });
+
+        if (!sessionRes.ok) {
+          throw new Error("Failed to initialize secure session cookie.");
+        }
+
         router.push(callbackUrl);
         router.refresh();
-      }, 800); //delay for cookie
+      } else {
+        throw new Error("Failed to retrieve authenticated user information.");
+      }
     } catch (err) {
       const authError = err as { code?: string; message?: string };
       console.error(authError);
@@ -52,8 +64,8 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold">{isRegister ? "Create Account" : "Welcome Back"}</h1>
         <p className="text-slate-400 text-xs mt-1">
           {isRegister
-            ? "Sign up to access to subscriber dashboards"
-            : "Login to access to subscriber dashboards."}
+            ? "Sign up with Firebase Auth"
+            : "Authenticate access to subscriber dashboards."}
         </p>
       </div>
 
@@ -91,7 +103,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold py-2 rounded text-sm transition disabled:opacity-50 cursor-pointer"
         >
-          {loading ? "Processing..." : isRegister ? "Sign Up" : "Login"}
+          {loading ? "Processing..." : isRegister ? "Sign Up" : "Authenticate Session"}
         </button>
       </form>
 
