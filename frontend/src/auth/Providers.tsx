@@ -1,4 +1,3 @@
-// frontend/src/components/Providers.tsx
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -22,14 +21,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       setLoading(false);
 
       if (currentUser) {
-        // Set secure server-side session cookie via our session API
         await fetch("/api/auth/session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: currentUser.email, uid: currentUser.uid }),
         });
       } else {
-        // Clear server-side session cookie
         await fetch("/api/auth/session", { method: "DELETE" });
       }
     });
