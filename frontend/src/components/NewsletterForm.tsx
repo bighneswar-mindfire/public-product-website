@@ -44,7 +44,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className="relative w-full max-w-xl mx-auto pb-6">
+    <div className="relative w-full max-w-xl mx-auto pb-10">
       <RenderingIndicator type="CSR" source="API" position="absolute" />
 
       <div className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm shadow-xl">

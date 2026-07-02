@@ -39,8 +39,9 @@ export function LiveStats() {
   }, []);
 
   return (
-    <div className="relative w-full max-w-md mx-auto pb-6">
+    <div className="relative w-full max-w-md mx-auto pb-10">
       <RenderingIndicator type="CSR" source="API" position="absolute" />
+
       <div className="bg-slate-900/40 border border-slate-800/85 p-6 rounded-lg flex items-center justify-center gap-5 backdrop-blur-sm shadow-lg">
         <div className="p-4 bg-emerald-500/10 rounded-md text-emerald-400">
           <Users size={28} />
