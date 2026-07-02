@@ -67,7 +67,7 @@ export default async function DashboardPage() {
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">
             Administrator Identity
           </h3>
-          <p className="text-lg font-bold text-slate-200 mt-2">Firebase User</p>
+          <p className="text-lg font-bold text-slate-200 mt-2">User Email</p>
           <p className="text-xs text-slate-500 font-mono mt-1">{session.email}</p>
         </div>
 

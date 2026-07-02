@@ -62,11 +62,7 @@ export default function LoginPage() {
     <div className="max-w-md mx-auto my-16 p-8 bg-slate-900/40 border border-slate-800 rounded-lg space-y-6 backdrop-blur-sm shadow-xl">
       <div className="text-center">
         <h1 className="text-2xl font-bold">{isRegister ? "Create Account" : "Welcome Back"}</h1>
-        <p className="text-slate-400 text-xs mt-1">
-          {isRegister
-            ? "Sign up with Firebase Auth"
-            : "Authenticate access to subscriber dashboards."}
-        </p>
+        <p className="text-slate-400 text-xs mt-1">{isRegister ? "Sign up " : "Log In."}</p>
       </div>
 
       <form onSubmit={handleAuth} className="space-y-4">
@@ -103,7 +99,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold py-2 rounded text-sm transition disabled:opacity-50 cursor-pointer"
         >
-          {loading ? "Processing..." : isRegister ? "Sign Up" : "Authenticate Session"}
+          {loading ? "Processing..." : isRegister ? "Sign Up" : "Log In"}
         </button>
       </form>
 

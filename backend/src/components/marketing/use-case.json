@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_marketing_use_cases",
+  "info": {
+    "displayName": "Use Case"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
