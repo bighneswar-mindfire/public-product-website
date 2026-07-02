@@ -34,9 +34,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <article className="max-w-2xl mx-auto py-8 space-y-6">
-      <RenderingIndicator type="ISR" source="CMS" />
-
+    <article className="max-w-2xl mx-auto py-8 space-y-6 pt-4">
       <Link href="/blog" className="text-xs font-mono text-emerald-400 hover:underline">
         &larr; Back
       </Link>
@@ -59,6 +57,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <div className="text-slate-300 leading-relaxed text-sm whitespace-pre-line space-y-4">
         {post.content}
+      </div>
+
+      <div className="flex justify-end pt-6">
+        <RenderingIndicator type="ISR" source="CMS" />
       </div>
     </article>
   );

@@ -14,8 +14,6 @@ export default async function FeaturesPage() {
 
   return (
     <div className="space-y-8 py-8">
-      <RenderingIndicator type="ISR" source="CMS" />
-
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Public Product Website Features</h1>
         <p className="text-slate-400 max-w-xl mx-auto text-sm">
@@ -34,6 +32,10 @@ export default async function FeaturesPage() {
             <p className="text-sm text-slate-400 leading-relaxed">{item.description}</p>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-end max-w-6xl mx-auto pt-4">
+        <RenderingIndicator type="ISR" source="CMS" />
       </div>
     </div>
   );

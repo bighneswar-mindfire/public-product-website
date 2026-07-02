@@ -24,7 +24,7 @@ export function Header() {
             href="/"
             className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"
           >
-            Vertex SaaS
+            Courav
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
             <Link href="/features" className="hover:text-emerald-400 transition">

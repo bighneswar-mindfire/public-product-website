@@ -12,7 +12,7 @@
   "pluginOptions": {},
   "attributes": {
     "heroTitle": {
-      "type": "string"
+      "type": "text"
     },
     "heroSubtitle": {
       "type": "text"

@@ -18,10 +18,6 @@ export default async function LandingPage() {
 
   return (
     <section className="space-y-16 py-12">
-      {/*rendering indicator */}
-      <RenderingIndicator type="ISR" source="CMS" />
-
-      {/* Hero Section */}
       <div className="text-center max-w-3xl mx-auto space-y-6">
         <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent leading-tight">
           {cmsData.heroTitle}
@@ -37,22 +33,17 @@ export default async function LandingPage() {
         </div>
       </div>
 
-      {/* Live Stats Section */}
+      {/* Live Stats */}
       <div className="border-y border-slate-900/60 py-10 space-y-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-slate-100">Real-Time Platform Telemetry</h2>
-          <p className="text-slate-400 text-sm mt-1">
-            Live metrics parsed directly from our system API endpoints.
-          </p>
+          <h2 className="text-2xl font-bold text-slate-100">Live Subscribers</h2>
+          <p className="text-slate-400 text-sm mt-1">Satisfied Clients</p>
         </div>
         <LiveStats />
       </div>
 
-      {/* Use Cases Section */}
       <div className="max-w-4xl mx-auto space-y-8 pt-6">
-        <h2 className="text-2xl font-bold text-center text-slate-100">
-          Built for Modern Engineering Models
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-slate-100">Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cmsData.useCases.map((uc) => (
             <div
@@ -66,9 +57,13 @@ export default async function LandingPage() {
         </div>
       </div>
 
-      {/* Newsletter Section */}
+      {/* Newsletter */}
       <div className="border-t border-slate-900/60 pt-12">
         <NewsletterForm />
+      </div>
+
+      <div className="flex justify-end pt-4">
+        <RenderingIndicator type="ISR" source="CMS" />
       </div>
     </section>
   );

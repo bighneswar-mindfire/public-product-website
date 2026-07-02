@@ -39,18 +39,15 @@ export function LiveStats() {
   }, []);
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-4">
-      {/*rendering indicator */}
-      <RenderingIndicator type="CSR" source="API" />
-
-      {/* Users Card */}
+    <div className="relative w-full max-w-md mx-auto pb-6">
+      <RenderingIndicator type="CSR" source="API" position="absolute" />
       <div className="bg-slate-900/40 border border-slate-800/85 p-6 rounded-lg flex items-center justify-center gap-5 backdrop-blur-sm shadow-lg">
         <div className="p-4 bg-emerald-500/10 rounded-md text-emerald-400">
           <Users size={28} />
         </div>
         <div>
           <p className="text-sm text-slate-400 uppercase tracking-wider font-semibold">
-            Total Users (Subscribers)
+            Total Users
           </p>
           <p className="text-3xl font-extrabold text-slate-100 mt-1">
             {stats !== null ? stats.totalUsers : "..."}

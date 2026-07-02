@@ -1,3 +1,4 @@
+// frontend/src/app/blog/page.tsx
 import { fetchFromStrapi } from "@/lib/strapi";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
 import Link from "next/link";
@@ -15,15 +16,16 @@ export default async function BlogIndexPage() {
   const posts = await fetchFromStrapi<BlogPost[]>("blog-posts", "blogPosts");
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 py-8">
-      <RenderingIndicator type="ISR" source="CMS" />
+    <div className="relative max-w-4xl mx-auto space-y-8 py-8">
+      <RenderingIndicator type="ISR" source="CMS" position="absolute" />
 
       <div className="border-b border-slate-900 pb-6">
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-100">
-          The Vertex Engineering Journal
+          Insights, Tips & Delivery Stories
         </h1>
         <p className="text-slate-400 mt-2 text-sm">
-          Deep-dives, systems insights, and platform mechanics written by our developer collective.
+          Stay updated with the latest logistics trends, shipping guides, packaging tips, and
+          courier industry insights.
         </p>
       </div>
 

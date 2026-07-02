@@ -15,11 +15,9 @@ export default async function PricingPage() {
   const plans = await fetchFromStrapi<PricingPlan[]>("pricing-plans", "pricing");
 
   return (
-    <div className="space-y-8 py-8">
-      <RenderingIndicator type="SSG" source="CMS" />
-
+    <div className="space-y-8 pt-8 pb-16">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Simple, Predictable Tier Pricing</h1>
+        <h1 className="text-4xl font-bold text-slate-100">Simple, Predictable Tier Pricing</h1>
         <p className="text-slate-400 max-w-xl mx-auto text-sm">
           No hidden fees. Scale up instantly with our zero-friction tier structures as database
           processing grows.
@@ -71,6 +69,10 @@ export default async function PricingPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-end max-w-5xl mx-auto pt-4">
+        <RenderingIndicator type="SSG" source="CMS" />
       </div>
     </div>
   );
