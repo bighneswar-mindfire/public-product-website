@@ -51,7 +51,7 @@ export function LiveStats() {
             Total Users
           </p>
           <p className="text-3xl font-extrabold text-slate-100 mt-1">
-            {stats !== null ? stats.totalUsers : "..."}
+            {stats !== null ? stats.totalUsers.toLocaleString() : "..."}
           </p>
         </div>
       </div>

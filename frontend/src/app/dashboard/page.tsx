@@ -75,7 +75,7 @@ export default async function DashboardPage() {
         <div className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-lg col-span-2 shadow-lg">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">
-              Waitlist Subscribers
+              Subscribers
             </h3>
             <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-2.5 py-1 rounded-full font-bold">
               {totalUsers} total

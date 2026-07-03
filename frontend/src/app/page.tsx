@@ -2,7 +2,6 @@ import { fetchFromStrapi } from "@/lib/strapi";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
 import { LiveStats } from "@/components/LiveStats";
 import { NewsletterForm } from "@/components/NewsletterForm";
-import Link from "next/link";
 
 export const revalidate = 3600;
 
@@ -23,13 +22,8 @@ export default async function LandingPage() {
           {cmsData.heroTitle}
         </h1>
         <p className="text-lg text-slate-400 leading-relaxed">{cmsData.heroSubtitle}</p>
-        <div>
-          <Link
-            href="/login"
-            className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10 cursor-pointer"
-          >
-            {cmsData.ctaText}
-          </Link>
+        <div className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10 ">
+          {cmsData.ctaText}
         </div>
       </div>
 
