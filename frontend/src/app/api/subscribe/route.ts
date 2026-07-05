@@ -1,14 +1,26 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { z } from "zod";
+
+const subscribeSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email({ message: "Invalid email format. Please enter a valid work email." }),
+});
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Record<string, unknown>;
-    const email = body.email;
 
-    if (!email || typeof email !== "string" || !email.includes("@")) {
-      return NextResponse.json({ error: "Invalid email address format." }, { status: 400 });
+    const parseResult = subscribeSchema.safeParse(body);
+
+    if (!parseResult.success) {
+      return NextResponse.json({ error: parseResult.error.issues[0].message }, { status: 400 });
     }
+
+    const { email } = parseResult.data;
 
     const result = db.addSubscriber(email);
 
