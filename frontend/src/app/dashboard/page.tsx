@@ -1,6 +1,8 @@
+// frontend/src/app/dashboard/page.tsx
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
+import { verifySessionToken } from "@/auth/jwt";
 import { db } from "@/lib/db";
 import { User, Mail } from "lucide-react";
 
@@ -8,11 +10,6 @@ export const dynamic = "force-dynamic";
 
 interface StatsData {
   totalUsers: number;
-}
-
-interface SessionData {
-  email: string;
-  uid: string;
 }
 
 export default async function DashboardPage() {
@@ -23,10 +20,9 @@ export default async function DashboardPage() {
     redirect("/login?callbackUrl=/dashboard");
   }
 
-  let session: SessionData | null = null;
-  try {
-    session = JSON.parse(sessionCookie.value) as SessionData;
-  } catch {
+  const session = await verifySessionToken(sessionCookie.value);
+
+  if (!session) {
     redirect("/login?callbackUrl=/dashboard");
   }
 
@@ -47,7 +43,7 @@ export default async function DashboardPage() {
   const subscribers = db.getSubscribers();
 
   return (
-    <div className="space-y-8 py-8">
+    <div className="relative space-y-8 pt-8 pb-16">
       <RenderingIndicator type="SSR" source="API" />
 
       <div className="border-b border-slate-900 pb-6 flex items-center justify-between">
@@ -62,7 +58,6 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Logged in user information card */}
         <div className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-lg col-span-1 shadow-lg">
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">
             Administrator Identity
@@ -71,7 +66,7 @@ export default async function DashboardPage() {
           <p className="text-xs text-slate-500 font-mono mt-1">{session.email}</p>
         </div>
 
-        {/*subscribers tracking card */}
+        {/* subscribers */}
         <div className="bg-slate-900/40 border border-slate-800/80 p-6 rounded-lg col-span-2 shadow-lg">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">

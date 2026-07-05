@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { signSessionToken } from "@/auth/jwt";
 
 export async function POST(req: Request) {
   try {
@@ -11,11 +12,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing session parameters." }, { status: 400 });
     }
 
+    const signedToken = await signSessionToken({ email, uid });
+
     const cookieStore = await cookies();
-    cookieStore.set("firebase-session", JSON.stringify({ email, uid }), {
+    cookieStore.set("firebase-session", signedToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60 * 24 * 7, // 1 week
+      maxAge: 60 * 60 * 24 * 7,
       path: "/",
     });
 
