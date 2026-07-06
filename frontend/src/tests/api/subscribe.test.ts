@@ -49,7 +49,7 @@ describe("Subscribe API Endpoint (POST /api/subscribe)", () => {
     const data = (await response.json()) as { error: string };
 
     expect(response.status).toBe(400);
-    expect(data.error).toBe("Invalid email address format.");
+    expect(data.error).toBe("Invalid email format. Please enter a valid email.");
     expect(db.addSubscriber).not.toHaveBeenCalled();
   });
 

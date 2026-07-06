@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { captureException } from "@sentry/nextjs";
+
 import { db } from "@/lib/db";
 import { z } from "zod";
 
@@ -7,7 +9,7 @@ const subscribeSchema = z.object({
     .string()
     .trim()
     .toLowerCase()
-    .email({ message: "Invalid email format. Please enter a valid work email." }),
+    .email({ message: "Invalid email format. Please enter a valid email." }),
 });
 
 export async function POST(req: Request) {
@@ -30,6 +32,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, count: result.count });
   } catch (error) {
+    captureException(error);
     console.error("Subscription process error:", error);
     return NextResponse.json({ error: "Internal server error occurred." }, { status: 500 });
   }

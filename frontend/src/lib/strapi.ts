@@ -1,4 +1,4 @@
-// frontend/src/lib/strapi.ts
+import { captureException } from "@sentry/nextjs";
 
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "";
 const useRealStrapi = strapiUrl !== "";
@@ -126,6 +126,7 @@ export async function fetchFromStrapi<T>(
         return normalizeStrapiData<T>(json);
       }
     } catch (error) {
+      captureException(error);
       console.warn(`Strapi fetch failed for /api/${endpoint}. Sourcing from fallback.`, error);
     }
   }
