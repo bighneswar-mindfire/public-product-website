@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach, MockInstance } from "vitest";
 import { GET } from "@/app/api/stats/route";
 import { db } from "@/lib/db";
 import { captureException } from "@sentry/nextjs";
@@ -15,10 +15,16 @@ vi.mock("@/lib/db", () => ({
 
 describe("Stats API Endpoint (GET /api/stats)", () => {
   const mockGetSubscribers = db.getSubscribers as unknown as ReturnType<typeof vi.fn>;
-  const mockCaptureException = captureException as unknown as ReturnType<typeof vi.fn>;
+
+  let consoleSpy: MockInstance;
 
   beforeEach(() => {
     vi.clearAllMocks();
+    consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleSpy.mockRestore();
   });
 
   it("returns 200 and the total users count on successful database reads", async () => {
@@ -30,6 +36,7 @@ describe("Stats API Endpoint (GET /api/stats)", () => {
     expect(response.status).toBe(200);
     expect(data.totalUsers).toBe(2);
     expect(captureException).not.toHaveBeenCalled();
+    expect(console.error).not.toHaveBeenCalled();
   });
 
   it("returns 500 and captures the exception in Sentry when database read fails", async () => {
@@ -43,6 +50,8 @@ describe("Stats API Endpoint (GET /api/stats)", () => {
     expect(response.status).toBe(500);
     expect(data.error).toBe("Internal server error occurred while retrieving platform telemetry.");
 
-    expect(mockCaptureException).toHaveBeenCalledWith(expect.any(Error));
+    expect(captureException).toHaveBeenCalledWith(expect.any(Error));
+
+    expect(consoleSpy).toHaveBeenCalled();
   });
 });

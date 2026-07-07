@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "lint:frontend": "npm run lint --prefix frontend",
-    "lint:backend": "npm run lint --prefix backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && npm run lint",
     "lint:all": "npm run lint:frontend && npm run lint:backend",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\""

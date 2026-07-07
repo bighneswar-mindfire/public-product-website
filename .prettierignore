@@ -7,3 +7,4 @@ dist
 .tmp
 *.db
 package-lock.json
+backend/.strapi-updater.json
