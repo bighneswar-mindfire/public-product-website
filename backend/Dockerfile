@@ -1,11 +1,10 @@
 FROM node:20-alpine AS base
 
-# install dependencies
 FROM base AS build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
 WORKDIR /opt/
 COPY package.json package-lock.json ./
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm ci
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
 WORKDIR /opt/app
 COPY . .
 ENV NODE_ENV=production

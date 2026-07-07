@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+  #Strapi backend
   backend:
     build:
       context: ./backend
@@ -12,16 +13,20 @@ services:
     environment:
       HOST: 0.0.0.0
       PORT: 1337
-      APP_KEYS: 3gmdFIUSzi8awe3hNdTbjw==,uuFSkJ0EqiKqPKYbyNsmxg==,BVz9Qi+yhDWRFjjQeZwNxA==,BF/MbLT09lEa6SKqSEeVPA==
-      API_TOKEN_SALT: sUvfAWWI80eprTLPOR6RIA==
-      ADMIN_JWT_SECRET: EgTmz8qDw9d6te2KXD3Smw==
-      TRANSFER_TOKEN_SALT: kdF8L6BDtAUDOMTZz8rM6g==
-      JWT_SECRET: IeVeZofWIHdzXM9ZcDBoxg==
+
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_FILENAME: ${DATABASE_FILENAME}
       NODE_ENV: production
     volumes:
-      - strapi-data:/opt/app/.tmp
-      - strapi-uploads:/opt/app/public/uploads
+      - ./backend/.tmp:/opt/app/.tmp
 
+  # Next.js Frontend
   frontend:
     build:
       context: ./frontend
@@ -30,24 +35,10 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      PORT: 3000
-      NODE_ENV: production
-      NEXT_PUBLIC_STRAPI_API_URL: http://backend:1337
-      NEXTAUTH_URL: http://localhost:3000
-      NEXTAUTH_SECRET: 9f7ef82abde41cbb5a8fd94dc467ee93bbda1e00e843c08cd93adcb4112e841f
-      NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyC4quL3H9izciPoqo8K7-O26RmVO_ixm2A
-      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: public-product-website.firebaseapp.com
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: public-product-website
-      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: public-product-website.firebasestorage.app
-      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: 747238380473
-      NEXT_PUBLIC_FIREBASE_APP_ID: 1:747238380473:web:42ed38fd6dce0177735c68
     volumes:
       - nextjs-subscribers:/app
     depends_on:
       - backend
 
 volumes:
-  strapi-data:
-  strapi-uploads:
   nextjs-subscribers:

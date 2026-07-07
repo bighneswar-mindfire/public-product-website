@@ -1,11 +1,10 @@
-# .github/workflows/ci.yml
 name: Continuous Integration
 
 on:
   push:
-    branches: [main, master]
+    branches: ["**"]
   pull_request:
-    branches: [main, master]
+    branches: ["**"]
 
 jobs:
   gitleaks-scan:
@@ -52,3 +51,6 @@ jobs:
 
       - name: Lint Backend (Strapi)
         run: npm run lint:backend
+
+      - name: Run Frontend Tests (Vitest)
+        run: npm run test --prefix frontend
