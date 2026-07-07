@@ -34,13 +34,13 @@ export default async function DashboardPage() {
       const data = (await res.json()) as StatsData;
       totalUsers = data.totalUsers;
     } else {
-      totalUsers = db.getSubscribers().length;
+      totalUsers = (await db.getSubscribers()).length;
     }
   } catch {
-    totalUsers = db.getSubscribers().length;
+    totalUsers = (await db.getSubscribers()).length;
   }
 
-  const subscribers = db.getSubscribers();
+  const subscribers = await db.getSubscribers();
 
   return (
     <div className="relative space-y-8 pt-8 pb-16">

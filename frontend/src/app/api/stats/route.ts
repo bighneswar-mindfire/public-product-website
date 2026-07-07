@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const subscribers = db.getSubscribers();
+    const subscribers = await db.getSubscribers();
 
     return NextResponse.json({
       totalUsers: subscribers.length,

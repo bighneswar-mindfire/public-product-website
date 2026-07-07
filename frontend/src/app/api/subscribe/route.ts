@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { captureException } from "@sentry/nextjs";
-
 import { db } from "@/lib/db";
 import { z } from "zod";
 
@@ -24,7 +23,7 @@ export async function POST(req: Request) {
 
     const { email } = parseResult.data;
 
-    const result = db.addSubscriber(email);
+    const result = await db.addSubscriber(email);
 
     if (!result.success) {
       return NextResponse.json({ error: result.error || "Conflict occurred." }, { status: 409 });
