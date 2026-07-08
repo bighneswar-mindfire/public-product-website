@@ -10,7 +10,7 @@ COPY . .
 ENV NODE_ENV=production
 RUN npm run build
 
-#production
+# production
 FROM base AS runner
 RUN apk add --no-cache vips-dev
 WORKDIR /opt/

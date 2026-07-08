@@ -15,10 +15,10 @@ export default async function FeaturesPage() {
   return (
     <div className="space-y-8 py-8">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold">Public Product Website Features</h1>
+        <h1 className="text-4xl font-bold">Facilities we provide</h1>
         <p className="text-slate-400 max-w-xl mx-auto text-sm">
-          Public Product Website is powered by Strapi, offering user friendly content modification
-          with zero setup complexity.
+          We offer a diverse range of vehicles to cater to different logistics needs, ensuring
+          efficient and reliable transportation.
         </p>
       </div>
 

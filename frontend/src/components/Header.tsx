@@ -22,7 +22,7 @@ export function Header() {
         <div className="flex items-center gap-8">
           <Link
             href="/"
-            className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"
+            className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"
           >
             Courav
           </Link>
