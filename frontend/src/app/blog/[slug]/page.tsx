@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { fetchFromStrapi } from "@/lib/strapi";
 import { RenderingIndicator } from "@/components/RenderingIndicator";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 export const revalidate = 60;
 
@@ -34,9 +36,12 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <article className="max-w-2xl mx-auto py-8 space-y-6 pt-4">
-      <Link href="/blog" className="text-xs font-mono text-emerald-400 hover:underline">
-        &larr; Back
+    <article className="relative max-w-4xl mx-auto py-8 space-y-6 pt-4 pb-16">
+      <Link
+        href="/blog"
+        className="text-sm sm:text-base font-semibold text-emerald-400 hover:text-emerald-300 transition duration-150 inline-flex items-center gap-1"
+      >
+        &larr; Back to articles
       </Link>
 
       <div className="space-y-2 pt-4">
@@ -55,8 +60,37 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <hr className="border-slate-900" />
 
-      <div className="text-slate-300 leading-relaxed text-sm whitespace-pre-line space-y-4">
-        {post.content}
+      <div className="text-slate-350 leading-relaxed text-sm sm:text-base space-y-4">
+        <ReactMarkdown
+          components={{
+            h1: ({ node, ...props }) => (
+              <h1 className="text-3xl font-extrabold my-5 text-slate-100" {...props} />
+            ),
+            h2: ({ node, ...props }) => (
+              <h2 className="text-2xl font-bold my-4 text-slate-200" {...props} />
+            ),
+            h3: ({ node, ...props }) => (
+              <h3 className="text-xl font-semibold my-3 text-slate-250" {...props} />
+            ),
+            p: ({ node, ...props }) => (
+              <p className="leading-relaxed my-3 text-slate-300" {...props} />
+            ),
+            strong: ({ node, ...props }) => (
+              <strong className="font-extrabold text-emerald-400" {...props} />
+            ),
+            ul: ({ node, ...props }) => (
+              <ul className="list-disc list-inside my-3 space-y-1.5" {...props} />
+            ),
+            ol: ({ node, ...props }) => (
+              <ol className="list-decimal list-inside my-3 space-y-1.5" {...props} />
+            ),
+            li: ({ node, ...props }) => (
+              <li className="text-slate-300 ml-2 inline-block" {...props} />
+            ),
+          }}
+        >
+          {post.content}
+        </ReactMarkdown>
       </div>
 
       <div className="flex justify-end pt-6">

@@ -47,7 +47,7 @@ export default async function BlogIndexPage() {
               href={`/blog/${post.slug}`}
               className="inline-block text-xs font-semibold text-emerald-400 hover:underline"
             >
-              Read Technical Breakdown &rarr;
+              Read more... &rarr;
             </Link>
           </article>
         ))}

@@ -1,61 +1,37 @@
-# 🚀 Getting started with Strapi
+# Courav Backend (Strapi CMS)
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+This is the Headless CMS powering the Courav marketing pages and blog journal. It provides a structured REST API for content management.
 
-### `develop`
+## Tech Stack
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+- **Framework:** Strapi CMS v5
+- **Language:** TypeScript
+- **Database:** PostgreSQL
 
-```
-npm run develop
-# or
-yarn develop
-```
+## 📝Content Architecture
 
-### `start`
+The system is configured with the following content types:
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+| Content Type     | Type        | Purpose                                         |
+| :--------------- | :---------- | :---------------------------------------------- |
+| **Landing Page** | Single Type | Hero section, CTAs, and Use-cases.              |
+| **Feature**      | Collection  | Detailed product capabilities list.             |
+| **Pricing Plan** | Collection  | Tier names, pricing, and feature arrays (JSON). |
+| **Blog Post**    | Collection  | Technical articles with Slug (UID) and Content. |
 
-```
-npm run start
-# or
-yarn start
-```
+## 🛡Security & Access
 
-### `build`
+- **Permissions**: Public access is granted to `find` and `findOne` for all marketing types.
+- **Security Headers**: Managed via Strapi's internal security middleware (Helmet).
+- **CORS**: Configured to allow requests from the local Next.js frontend (port 3000).
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+## Database Persistence
 
-```
-npm run build
-# or
-yarn build
-```
+- In development, the database is stored at `backend/.tmp/data.db`.
+- When running via **Docker**, this directory is **bind-mounted** to the host machine. This ensures that any data you create in the Strapi Admin panel is preserved even if the container is destroyed or rebuilt.
 
-## ⚙️ Deployment
+## 📦 Local Development
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
-
-```
-yarn strapi deploy
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+1. Run `npm install`.
+2. Run `npm run develop`.
+3. Access the admin panel at `http://localhost:1337/admin` to manage content.
