@@ -11,9 +11,7 @@ describe("Features Page (RSC)", () => {
     const PageJSX = await FeaturesPage();
     render(PageJSX);
 
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Public Product Website Features"
-    );
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Facilities we provide");
 
     expect(screen.getByText("Feature 1")).toBeInTheDocument();
     expect(screen.getByText("Feature description 1.")).toBeInTheDocument();
