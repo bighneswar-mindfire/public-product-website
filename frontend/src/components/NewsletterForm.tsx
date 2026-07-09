@@ -48,9 +48,11 @@ export function NewsletterForm() {
       <RenderingIndicator type="CSR" source="API" position="absolute" />
 
       <div className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm shadow-xl">
-        <h3 className="text-lg font-bold text-slate-100 mb-2">Join the Private Beta</h3>
+        <h3 className="text-lg font-bold text-slate-100 mb-2">
+          Get Your Free Shipping Quote Today
+        </h3>
         <p className="text-slate-400 text-sm mb-4">
-          Gain early platform access, standard usage tiering, and weekly developer logs.
+          Ready to ship? Request a quote and discover courier solutions for to your needs.
         </p>
 
         <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
@@ -61,7 +63,7 @@ export function NewsletterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
-            className="bg-slate-950 border border-slate-750 text-slate-100 rounded px-3 py-2 text-sm w-full focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-50 transition"
+            className="bg-slate-950 border border-slate-700 text-slate-100 rounded px-3 py-2 text-sm w-full focus:outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-50 transition"
           />
           <button
             type="submit"

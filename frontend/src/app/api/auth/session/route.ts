@@ -12,8 +12,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing ID token." }, { status: 400 });
     }
 
-    // Verify the caller actually authenticated with Firebase before we mint a
-    // session cookie. Without this, anyone could POST an arbitrary identity.
     let decoded;
     try {
       decoded = await getAdminAuth().verifyIdToken(idToken);

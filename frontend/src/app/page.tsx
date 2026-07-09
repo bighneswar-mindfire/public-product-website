@@ -22,9 +22,12 @@ export default async function LandingPage() {
           {cmsData.heroTitle}
         </h1>
         <p className="text-lg text-slate-400 leading-relaxed">{cmsData.heroSubtitle}</p>
-        <div className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10 ">
+        <a
+          href="#newsletter"
+          className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10"
+        >
           {cmsData.ctaText}
-        </div>
+        </a>
       </div>
 
       {/* Live Stats */}
@@ -52,7 +55,7 @@ export default async function LandingPage() {
       </div>
 
       {/* Newsletter */}
-      <div className="border-t border-slate-900/60 pt-12">
+      <div id="newsletter" className="scroll-mt-20 border-t border-slate-900/60 pt-12">
         <NewsletterForm />
       </div>
 

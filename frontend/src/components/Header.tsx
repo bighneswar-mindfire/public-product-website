@@ -40,7 +40,7 @@ export function Header() {
             {user && (
               <Link
                 href="/dashboard"
-                className="text-slate-350 hover:text-emerald-400 transition font-medium"
+                className="text-slate-300 hover:text-emerald-400 transition font-medium"
               >
                 Dashboard
               </Link>

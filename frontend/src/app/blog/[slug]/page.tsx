@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <hr className="border-slate-900" />
 
-      <div className="text-slate-350 leading-relaxed text-sm sm:text-base space-y-4">
+      <div className="text-slate-300 leading-relaxed text-sm sm:text-base space-y-4">
         <ReactMarkdown
           components={{
             h1: ({ node, ...props }) => (
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <h2 className="text-2xl font-bold my-4 text-slate-200" {...props} />
             ),
             h3: ({ node, ...props }) => (
-              <h3 className="text-xl font-semibold my-3 text-slate-250" {...props} />
+              <h3 className="text-xl font-semibold my-3 text-slate-200" {...props} />
             ),
             p: ({ node, ...props }) => (
               <p className="leading-relaxed my-3 text-slate-300" {...props} />

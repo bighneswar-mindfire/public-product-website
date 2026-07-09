@@ -26,7 +26,7 @@ export default async function FeaturesPage() {
         {features.map((item) => (
           <div
             key={item.id}
-            className="p-6 bg-slate-900/40 border border-slate-850 rounded-lg hover:border-emerald-500/20 transition duration-300"
+            className="p-6 bg-slate-900/40 border border-slate-800 rounded-lg hover:border-emerald-500/20 transition duration-300"
           >
             <h3 className="text-xl font-semibold mb-3 text-emerald-400">{item.title}</h3>
             <p className="text-sm text-slate-400 leading-relaxed">{item.description}</p>

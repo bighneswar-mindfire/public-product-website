@@ -3,14 +3,6 @@ import { getAuth, type Auth } from "firebase-admin/auth";
 
 let adminAuth: Auth | null = null;
 
-/**
- * Lazily initialize the Firebase Admin SDK and return its Auth instance.
- *
- * Initialization is deferred (not run at module load) so that builds and
- * unrelated routes don't crash when the service account credential is absent.
- * The credential is read from FIREBASE_SERVICE_ACCOUNT_KEY, which must contain
- * the full service-account JSON (as a single-line string).
- */
 export function getAdminAuth(): Auth {
   if (adminAuth) {
     return adminAuth;
