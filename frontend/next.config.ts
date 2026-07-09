@@ -15,8 +15,6 @@ const isDev = process.env.NODE_ENV === "development";
 const strapiOrigin = originOf(process.env.NEXT_PUBLIC_STRAPI_API_URL);
 const sentryOrigin = originOf(process.env.NEXT_PUBLIC_SENTRY_DSN);
 
-// Firebase email/password auth talks to Google's identity endpoints over
-// fetch/XHR; Sentry's session replay ships events from a blob: web worker.
 const connectSrc = [
   "'self'",
   "https://identitytoolkit.googleapis.com",
