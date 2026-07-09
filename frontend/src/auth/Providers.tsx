@@ -24,10 +24,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
       if (currentUser) {
         console.log("active session");
+        const idToken = await currentUser.getIdToken();
         await fetch("/api/auth/session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: currentUser.email, uid: currentUser.uid }),
+          body: JSON.stringify({ idToken }),
         });
       } else {
         console.log("no user");

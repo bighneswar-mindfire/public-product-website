@@ -1,18 +1,35 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { signSessionToken } from "@/auth/jwt";
+import { getAdminAuth } from "@/auth/firebaseAdmin";
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Record<string, unknown>;
-    const email = body.email;
-    const uid = body.uid;
+    const idToken = body.idToken;
 
-    if (!email || !uid || typeof email !== "string" || typeof uid !== "string") {
-      return NextResponse.json({ error: "Missing session parameters." }, { status: 400 });
+    if (!idToken || typeof idToken !== "string") {
+      return NextResponse.json({ error: "Missing ID token." }, { status: 400 });
     }
 
-    const signedToken = await signSessionToken({ email, uid });
+    // Verify the caller actually authenticated with Firebase before we mint a
+    // session cookie. Without this, anyone could POST an arbitrary identity.
+    let decoded;
+    try {
+      decoded = await getAdminAuth().verifyIdToken(idToken);
+    } catch (error) {
+      console.warn("Firebase ID token verification failed.", error);
+      return NextResponse.json({ error: "Invalid authentication token." }, { status: 401 });
+    }
+
+    if (!decoded.email) {
+      return NextResponse.json(
+        { error: "Authenticated user has no email address." },
+        { status: 400 }
+      );
+    }
+
+    const signedToken = await signSessionToken({ email: decoded.email, uid: decoded.uid });
 
     const cookieStore = await cookies();
     cookieStore.set("firebase-session", signedToken, {

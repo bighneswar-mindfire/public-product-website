@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { POST, DELETE } from "@/app/api/auth/session/route";
 import { signSessionToken } from "@/auth/jwt";
+import { getAdminAuth } from "@/auth/firebaseAdmin";
 
 const mockSetCookie = vi.fn();
 const mockDeleteCookie = vi.fn();
@@ -17,6 +18,11 @@ vi.mock("@/auth/jwt", () => ({
   signSessionToken: vi.fn(),
 }));
 
+const mockVerifyIdToken = vi.fn();
+vi.mock("@/auth/firebaseAdmin", () => ({
+  getAdminAuth: vi.fn(() => ({ verifyIdToken: mockVerifyIdToken })),
+}));
+
 describe("Session Auth API Endpoint (/api/auth/session)", () => {
   const mockSignSessionToken = signSessionToken as unknown as ReturnType<typeof vi.fn>;
 
@@ -24,13 +30,14 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
     vi.clearAllMocks();
   });
 
-  it("generates a signed JWT and sets a secure httpOnly cookie on POST", async () => {
+  it("verifies the Firebase ID token, then signs a JWT and sets a secure httpOnly cookie on POST", async () => {
+    mockVerifyIdToken.mockResolvedValue({ email: "admin@domain.com", uid: "uid123" });
     mockSignSessionToken.mockResolvedValue("mocked-signed-jwt-token-hash");
 
     const req = new Request("http://localhost:3000/api/auth/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "admin@domain.com", uid: "uid123" }),
+      body: JSON.stringify({ idToken: "valid-firebase-id-token" }),
     });
 
     const response = await POST(req);
@@ -38,6 +45,7 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
 
     expect(response.status).toBe(200);
     expect(data.success).toBe(true);
+    expect(mockVerifyIdToken).toHaveBeenCalledWith("valid-firebase-id-token");
     expect(signSessionToken).toHaveBeenCalledWith({ email: "admin@domain.com", uid: "uid123" });
 
     expect(mockSetCookie).toHaveBeenCalledWith(
@@ -50,18 +58,37 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
     );
   });
 
-  it("returns 400 when session parameter schemas are incorrect or missing", async () => {
+  it("returns 400 when the ID token is missing", async () => {
     const req = new Request("http://localhost:3000/api/auth/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid: "uid123" }), // Missing email
+      body: JSON.stringify({ email: "admin@domain.com", uid: "uid123" }), // no idToken
     });
 
     const response = await POST(req);
     const data = (await response.json()) as { error: string };
 
     expect(response.status).toBe(400);
-    expect(data.error).toBe("Missing session parameters.");
+    expect(data.error).toBe("Missing ID token.");
+    expect(mockVerifyIdToken).not.toHaveBeenCalled();
+    expect(mockSetCookie).not.toHaveBeenCalled();
+  });
+
+  it("returns 401 and sets no cookie when the ID token fails verification", async () => {
+    mockVerifyIdToken.mockRejectedValue(new Error("Firebase ID token has expired"));
+
+    const req = new Request("http://localhost:3000/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken: "forged-or-expired-token" }),
+    });
+
+    const response = await POST(req);
+    const data = (await response.json()) as { error: string };
+
+    expect(response.status).toBe(401);
+    expect(data.error).toBe("Invalid authentication token.");
+    expect(signSessionToken).not.toHaveBeenCalled();
     expect(mockSetCookie).not.toHaveBeenCalled();
   });
 

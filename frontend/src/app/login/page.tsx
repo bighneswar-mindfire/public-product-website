@@ -29,10 +29,11 @@ function LoginForm() {
       const currentUser = userCredential.user;
 
       if (currentUser && currentUser.email) {
+        const idToken = await currentUser.getIdToken();
         const sessionRes = await fetch("/api/auth/session", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: currentUser.email, uid: currentUser.uid }),
+          body: JSON.stringify({ idToken }),
         });
 
         if (!sessionRes.ok) {
