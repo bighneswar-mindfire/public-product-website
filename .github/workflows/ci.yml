@@ -41,7 +41,8 @@ jobs:
         run: npm run format:check
 
       - name: Install Frontend Dependencies
-        run: npm ci --prefix frontend
+        run: npm install
+        working-directory: ./frontend
 
       - name: Lint Frontend (Next.js)
         run: npm run lint
