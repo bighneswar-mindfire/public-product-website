@@ -74,15 +74,15 @@ export function NewsletterForm() {
           </button>
         </form>
 
-        {message && (
-          <div
-            className={`mt-3 text-xs font-semibold ${
-              status === "success" ? "text-emerald-400" : "text-rose-400"
-            }`}
-          >
-            {message}
-          </div>
-        )}
+        <div
+          role="status"
+          aria-live="polite"
+          className={`mt-3 text-xs font-semibold empty:hidden ${
+            status === "success" ? "text-emerald-400" : "text-rose-400"
+          }`}
+        >
+          {message}
+        </div>
       </div>
     </div>
   );

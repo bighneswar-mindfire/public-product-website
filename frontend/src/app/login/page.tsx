@@ -68,8 +68,11 @@ function LoginForm() {
 
       <form onSubmit={handleAuth} className="space-y-4">
         <div>
-          <label className="block text-xs text-slate-400 mb-1.5 font-medium">Email Address</label>
+          <label htmlFor="email" className="block text-xs text-slate-400 mb-1.5 font-medium">
+            Email Address
+          </label>
           <input
+            id="email"
             type="email"
             required
             placeholder="e.g. user@domain.com"
@@ -80,10 +83,11 @@ function LoginForm() {
         </div>
 
         <div>
-          <label className="block text-xs text-slate-400 mb-1.5 font-medium">
+          <label htmlFor="password" className="block text-xs text-slate-400 mb-1.5 font-medium">
             Password (Min 6 chars)
           </label>
           <input
+            id="password"
             type="password"
             required
             placeholder="e.g. password"
@@ -93,7 +97,9 @@ function LoginForm() {
           />
         </div>
 
-        {error && <div className="text-xs text-rose-400">{error}</div>}
+        <div role="alert" aria-live="assertive" className="text-xs text-rose-400 empty:hidden">
+          {error}
+        </div>
 
         <button
           type="submit"
