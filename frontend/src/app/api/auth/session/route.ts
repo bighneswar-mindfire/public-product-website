@@ -27,6 +27,13 @@ export async function POST(req: Request) {
       );
     }
 
+    if (!decoded.email_verified) {
+      return NextResponse.json(
+        { error: "Please verify your email address before continuing." },
+        { status: 403 }
+      );
+    }
+
     const signedToken = await signSessionToken({ email: decoded.email, uid: decoded.uid });
 
     const cookieStore = await cookies();

@@ -31,7 +31,11 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
   });
 
   it("verifies the Firebase ID token, then signs a JWT and sets a secure httpOnly cookie on POST", async () => {
-    mockVerifyIdToken.mockResolvedValue({ email: "admin@domain.com", uid: "uid123" });
+    mockVerifyIdToken.mockResolvedValue({
+      email: "admin@domain.com",
+      uid: "uid123",
+      email_verified: true,
+    });
     mockSignSessionToken.mockResolvedValue("mocked-signed-jwt-token-hash");
 
     const req = new Request("http://localhost:3000/api/auth/session", {
@@ -56,6 +60,28 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
         path: "/",
       })
     );
+  });
+
+  it("returns 403 and sets no cookie when the email is not yet verified", async () => {
+    mockVerifyIdToken.mockResolvedValue({
+      email: "unverified@domain.com",
+      uid: "uid123",
+      email_verified: false,
+    });
+
+    const req = new Request("http://localhost:3000/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken: "valid-firebase-id-token" }),
+    });
+
+    const response = await POST(req);
+    const data = (await response.json()) as { error: string };
+
+    expect(response.status).toBe(403);
+    expect(data.error).toBe("Please verify your email address before continuing.");
+    expect(signSessionToken).not.toHaveBeenCalled();
+    expect(mockSetCookie).not.toHaveBeenCalled();
   });
 
   it("returns 400 when the ID token is missing", async () => {
