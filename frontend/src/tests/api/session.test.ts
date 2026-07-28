@@ -1,12 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { POST, DELETE } from "@/app/api/auth/session/route";
 import { signSessionToken } from "@/auth/jwt";
-import { getAdminAuth } from "@/auth/firebaseAdmin";
 
 const mockSetCookie = vi.fn();
 const mockDeleteCookie = vi.fn();
 
-// Mock Next.js cookies utility
 vi.mock("next/headers", () => ({
   cookies: () => ({
     set: mockSetCookie,
@@ -50,7 +48,11 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
     expect(response.status).toBe(200);
     expect(data.success).toBe(true);
     expect(mockVerifyIdToken).toHaveBeenCalledWith("valid-firebase-id-token");
-    expect(signSessionToken).toHaveBeenCalledWith({ email: "admin@domain.com", uid: "uid123" });
+    expect(signSessionToken).toHaveBeenCalledWith({
+      email: "admin@domain.com",
+      uid: "uid123",
+      name: undefined,
+    });
 
     expect(mockSetCookie).toHaveBeenCalledWith(
       "firebase-session",
@@ -60,6 +62,31 @@ describe("Session Auth API Endpoint (/api/auth/session)", () => {
         path: "/",
       })
     );
+  });
+
+  it("includes the display name in the signed session when present on the token", async () => {
+    mockVerifyIdToken.mockResolvedValue({
+      email: "admin@domain.com",
+      uid: "uid123",
+      email_verified: true,
+      name: "Jane Doe",
+    });
+    mockSignSessionToken.mockResolvedValue("mocked-signed-jwt-token-hash");
+
+    const req = new Request("http://localhost:3000/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken: "valid-firebase-id-token" }),
+    });
+
+    const response = await POST(req);
+
+    expect(response.status).toBe(200);
+    expect(signSessionToken).toHaveBeenCalledWith({
+      email: "admin@domain.com",
+      uid: "uid123",
+      name: "Jane Doe",
+    });
   });
 
   it("returns 403 and sets no cookie when the email is not yet verified", async () => {

@@ -52,7 +52,9 @@ export default async function DashboardPage() {
         </div>
         <div className="bg-slate-900/50 px-4 py-2 border border-slate-800 rounded-lg flex items-center gap-2">
           <User size={16} className="text-emerald-400" />
-          <span className="text-xs font-mono font-medium text-slate-200">{session.email}</span>
+          <span className="text-xs font-mono font-medium text-slate-200">
+            {session.name ? `${session.name} · ${session.email}` : session.email}
+          </span>
         </div>
       </div>
 
@@ -61,7 +63,7 @@ export default async function DashboardPage() {
           <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wide">
             Administrator Identity
           </h3>
-          <p className="text-lg font-bold text-slate-200 mt-2">User Email</p>
+          <p className="text-lg font-bold text-slate-200 mt-2">{session.name || "User"}</p>
           <p className="text-xs text-slate-500 font-mono mt-1">{session.email}</p>
         </div>
 

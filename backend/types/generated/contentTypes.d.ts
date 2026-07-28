@@ -521,6 +521,30 @@ export interface ApiPricingPlanPricingPlan extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTestimonialTestimonial extends Struct.CollectionTypeSchema {
+  collectionName: "testimonials";
+  info: {
+    displayName: "Testimonial";
+    pluralName: "testimonials";
+    singularName: "testimonial";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> & Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<"oneToMany", "api::testimonial.testimonial"> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    review: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> & Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease extends Struct.CollectionTypeSchema {
   collectionName: "strapi_releases";
   info: {
@@ -955,6 +979,7 @@ declare module "@strapi/strapi" {
       "api::home-page.home-page": ApiHomePageHomePage;
       "api::landing-page.landing-page": ApiLandingPageLandingPage;
       "api::pricing-plan.pricing-plan": ApiPricingPlanPricingPlan;
+      "api::testimonial.testimonial": ApiTestimonialTestimonial;
       "plugin::content-releases.release": PluginContentReleasesRelease;
       "plugin::content-releases.release-action": PluginContentReleasesReleaseAction;
       "plugin::i18n.locale": PluginI18NLocale;

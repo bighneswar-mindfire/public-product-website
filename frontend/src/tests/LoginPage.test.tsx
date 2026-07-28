@@ -60,8 +60,8 @@ describe("Login Page (Client Component)", () => {
 
     render(<LoginPage />);
 
-    const emailInput = screen.getByPlaceholderText("e.g. user@domain.com");
-    const passwordInput = screen.getByPlaceholderText("e.g. password");
+    const emailInput = screen.getByPlaceholderText("Enter email");
+    const passwordInput = screen.getByPlaceholderText("Enter password");
 
     // Updated to match your button's exact label: "Log In"
     const submitButton = screen.getByRole("button", { name: /Log In/i });
@@ -102,10 +102,10 @@ describe("Login Page (Client Component)", () => {
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Create Account");
 
-    const fullNameInput = screen.getByPlaceholderText("e.g. Jane Doe");
-    const emailInput = screen.getByPlaceholderText("e.g. user@domain.com");
-    const passwordInput = screen.getByPlaceholderText("e.g. password");
-    const confirmPasswordInput = screen.getByPlaceholderText("Re-enter your password");
+    const fullNameInput = screen.getByPlaceholderText("Enter full name");
+    const emailInput = screen.getByPlaceholderText("Enter email");
+    const passwordInput = screen.getByPlaceholderText("Enter password");
+    const confirmPasswordInput = screen.getByPlaceholderText("Re-enter password");
     const submitButton = screen.getByRole("button", { name: /Sign Up/i });
 
     fireEvent.change(fullNameInput, { target: { value: "New User" } });
@@ -132,16 +132,16 @@ describe("Login Page (Client Component)", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Don't have an account\? Sign Up/i }));
 
-    fireEvent.change(screen.getByPlaceholderText("e.g. Jane Doe"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter full name"), {
       target: { value: "New User" },
     });
-    fireEvent.change(screen.getByPlaceholderText("e.g. user@domain.com"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter email"), {
       target: { value: "newuser@domain.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText("e.g. password"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter password"), {
       target: { value: "securePassword" },
     });
-    fireEvent.change(screen.getByPlaceholderText("Re-enter your password"), {
+    fireEvent.change(screen.getByPlaceholderText("Re-enter password"), {
       target: { value: "differentPassword" },
     });
     fireEvent.click(screen.getByRole("button", { name: /Sign Up/i }));
@@ -163,10 +163,10 @@ describe("Login Page (Client Component)", () => {
 
     render(<LoginPage />);
 
-    fireEvent.change(screen.getByPlaceholderText("e.g. user@domain.com"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter email"), {
       target: { value: "unverified@domain.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText("e.g. password"), {
+    fireEvent.change(screen.getByPlaceholderText("Enter password"), {
       target: { value: "correctPassword" },
     });
     fireEvent.click(screen.getByRole("button", { name: /Log In/i }));
@@ -211,16 +211,16 @@ describe("Login Page (Client Component)", () => {
       render(<LoginPage />);
 
       fireEvent.click(screen.getByRole("button", { name: /Don't have an account\? Sign Up/i }));
-      fireEvent.change(screen.getByPlaceholderText("e.g. Jane Doe"), {
+      fireEvent.change(screen.getByPlaceholderText("Enter full name"), {
         target: { value: "New User" },
       });
-      fireEvent.change(screen.getByPlaceholderText("e.g. user@domain.com"), {
+      fireEvent.change(screen.getByPlaceholderText("Enter email"), {
         target: { value: "newuser@domain.com" },
       });
-      fireEvent.change(screen.getByPlaceholderText("e.g. password"), {
+      fireEvent.change(screen.getByPlaceholderText("Enter password"), {
         target: { value: "securePassword" },
       });
-      fireEvent.change(screen.getByPlaceholderText("Re-enter your password"), {
+      fireEvent.change(screen.getByPlaceholderText("Re-enter password"), {
         target: { value: "securePassword" },
       });
       fireEvent.click(screen.getByRole("button", { name: /Sign Up/i }));

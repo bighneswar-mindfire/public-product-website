@@ -56,6 +56,26 @@ const fallbackCMS = {
       features: ["Unlimited Members", "Isolated Cluster Deployments", "1 Solutions Architect"],
     },
   ],
+  testimonials: [
+    {
+      id: "1",
+      name: "Sarah Chen",
+      review:
+        "Rolling this out cut our onboarding time in half. The dashboard alone paid for itself in the first month.",
+    },
+    {
+      id: "2",
+      name: "Marcus Webb",
+      review:
+        "Support is fast and the product just works. We haven't had a single incident since switching over.",
+    },
+    {
+      id: "3",
+      name: "Priya Nair",
+      review:
+        "Exactly what we needed to replace three separate tools. Clean UI, solid docs, easy setup.",
+    },
+  ],
   blogPosts: [
     {
       title: "Understanding Serverless Latency in Modern Edge Computing",

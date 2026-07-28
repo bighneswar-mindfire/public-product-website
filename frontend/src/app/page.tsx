@@ -12,8 +12,18 @@ interface LandingData {
   useCases: Array<{ id: string; title: string; description: string }>;
 }
 
+interface Testimonial {
+  id: string;
+  name: string;
+  review: string;
+}
+
 export default async function LandingPage() {
   const cmsData = await fetchFromStrapi<LandingData>("landing-page?populate=*", "landingPage");
+  const testimonials = await fetchFromStrapi<Testimonial[]>(
+    "testimonials?populate=*",
+    "testimonials"
+  );
 
   return (
     <section className="space-y-16 py-12">
@@ -49,6 +59,26 @@ export default async function LandingPage() {
             >
               <h3 className="text-lg font-semibold text-emerald-400 mb-2">{uc.title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">{uc.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="max-w-4xl mx-auto space-y-8 pt-6 border-t border-slate-900/60">
+        <h2 className="text-2xl font-bold text-center text-slate-100 pt-6">
+          What our customers say
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm flex flex-col justify-between"
+            >
+              <p className="text-sm text-slate-400 leading-relaxed">
+                &ldquo;{testimonial.review}&rdquo;
+              </p>
+              <p className="text-sm font-semibold text-emerald-400 mt-4">{testimonial.name}</p>
             </div>
           ))}
         </div>

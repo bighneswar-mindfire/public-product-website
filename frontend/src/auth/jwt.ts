@@ -2,7 +2,11 @@ import { SignJWT, jwtVerify } from "jose";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.NEXTAUTH_SECRET);
 
-export async function signSessionToken(payload: { email: string; uid: string }): Promise<string> {
+export async function signSessionToken(payload: {
+  email: string;
+  uid: string;
+  name?: string;
+}): Promise<string> {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -12,10 +16,10 @@ export async function signSessionToken(payload: { email: string; uid: string }):
 
 export async function verifySessionToken(
   token: string
-): Promise<{ email: string; uid: string } | null> {
+): Promise<{ email: string; uid: string; name?: string } | null> {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET);
-    return payload as { email: string; uid: string };
+    return payload as { email: string; uid: string; name?: string };
   } catch (error) {
     console.warn("JWT Verification failed. Token has been tampered with or is expired.", error);
     return null;

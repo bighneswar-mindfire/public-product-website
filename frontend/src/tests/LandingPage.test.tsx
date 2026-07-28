@@ -27,6 +27,11 @@ describe("Landing Page", () => {
     expect(screen.getByText("Title 1")).toBeInTheDocument();
     expect(screen.getByText("Description 1.")).toBeInTheDocument();
 
+    expect(screen.getByText("Sarah Chen")).toBeInTheDocument();
+    expect(
+      screen.getByText(/Rolling this out cut our onboarding time in half/)
+    ).toBeInTheDocument();
+
     expect(screen.getByTestId("mock-live-stats")).toBeInTheDocument();
     expect(screen.getByTestId("mock-newsletter-form")).toBeInTheDocument();
   });

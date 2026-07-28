@@ -34,7 +34,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const signedToken = await signSessionToken({ email: decoded.email, uid: decoded.uid });
+    const signedToken = await signSessionToken({
+      email: decoded.email,
+      uid: decoded.uid,
+      name: typeof decoded.name === "string" ? decoded.name : undefined,
+    });
 
     const cookieStore = await cookies();
     cookieStore.set("firebase-session", signedToken, {
