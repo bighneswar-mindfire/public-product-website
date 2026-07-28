@@ -32,10 +32,10 @@ export function NewsletterForm() {
       if (res.ok) {
         setStatus("success");
         setEmail("");
-        setMessage(`Success! Total Waitlist count is now ${data.count}.`);
+        setMessage("You have successfully subscribed to our newsletter!");
       } else {
         setStatus("error");
-        setMessage(data.error || "An error occurred while joining the waitlist.");
+        setMessage(data.error || "An error occurred while subscribing.");
       }
     } catch {
       setStatus("error");
@@ -48,18 +48,17 @@ export function NewsletterForm() {
       <RenderingIndicator type="CSR" source="API" position="absolute" />
 
       <div className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm shadow-xl">
-        <h3 className="text-lg font-bold text-slate-100 mb-2">
-          Get Your Free Shipping Quote Today
-        </h3>
+        <h3 className="text-lg font-bold text-slate-100 mb-2">Join Our Logistics Community.</h3>
         <p className="text-slate-400 text-sm mb-4">
-          Ready to ship? Request a quote and discover courier solutions for to your needs.
+          Be the first to hear about new services, shipping solutions and expert transportation
+          advice.
         </p>
 
         <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
           <input
             type="email"
             required
-            placeholder="enter-your-work-email@domain.com"
+            placeholder="Subscribe now!"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
