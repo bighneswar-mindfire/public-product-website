@@ -42,15 +42,15 @@ export function LiveStats() {
     <div className="relative w-full max-w-md mx-auto pb-10">
       <RenderingIndicator type="CSR" source="API" position="absolute" />
 
-      <div className="bg-slate-900/40 border border-slate-800/85 p-6 rounded-lg flex items-center justify-center gap-5 backdrop-blur-sm shadow-lg">
-        <div className="p-4 bg-emerald-500/10 rounded-md text-emerald-400">
+      <div className="bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/85 p-6 rounded-lg flex items-center justify-center gap-5 backdrop-blur-sm shadow-lg transition-colors duration-300">
+        <div className="p-4 bg-emerald-500/10 rounded-md text-emerald-600 dark:text-emerald-400">
           <Users size={28} />
         </div>
         <div>
-          <p className="text-sm text-slate-400 uppercase tracking-wider font-semibold">
+          <p className="text-sm text-slate-600 dark:text-slate-400 uppercase tracking-wider font-semibold">
             Total Users
           </p>
-          <p className="text-3xl font-extrabold text-slate-100 mt-1">
+          <p className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-1">
             {stats !== null ? stats.totalUsers.toLocaleString() : "..."}
           </p>
         </div>

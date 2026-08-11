@@ -18,7 +18,7 @@ describe("NewsletterForm Component", () => {
 
     render(<NewsletterForm />);
 
-    const emailInput = screen.getByPlaceholderText("enter-your-work-email@domain.com");
+    const emailInput = screen.getByPlaceholderText("Subscribe now!");
     const submitButton = screen.getByRole("button", { name: /subscribe/i });
 
     fireEvent.change(emailInput, { target: { value: "testuser@domain.com" } });
@@ -27,7 +27,7 @@ describe("NewsletterForm Component", () => {
 
     expect(submitButton).toBeDisabled();
 
-    const successMsg = await screen.findByText(/Success! Total Waitlist count is now 5/i);
+    const successMsg = await screen.findByText(/successfully subscribed/i);
     expect(successMsg).toBeInTheDocument();
   });
 
@@ -42,7 +42,7 @@ describe("NewsletterForm Component", () => {
 
     render(<NewsletterForm />);
 
-    const emailInput = screen.getByPlaceholderText("enter-your-work-email@domain.com");
+    const emailInput = screen.getByPlaceholderText("Subscribe now!");
     const submitButton = screen.getByRole("button", { name: /subscribe/i });
 
     // Simulate input typing and click submit

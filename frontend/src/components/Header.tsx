@@ -76,7 +76,7 @@ export function Header() {
               </Link>
               <Link
                 href="/login"
-                className="bg-emerald-500 text-slate-950 font-semibold px-3 py-1.5 rounded hover:bg-emerald-400 transition"
+                className="bg-emerald-200 dark:bg-emerald-500 text-slate-950 font-semibold px-3 py-1.5 rounded hover:bg-emerald-300 dark:hover:bg-emerald-400 transition"
               >
                 Get Started
               </Link>

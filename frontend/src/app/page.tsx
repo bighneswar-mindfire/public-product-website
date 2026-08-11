@@ -36,7 +36,7 @@ export default async function LandingPage() {
         </p>
         <a
           href="#newsletter"
-          className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10"
+          className="inline-block bg-emerald-200 dark:bg-emerald-500 hover:bg-emerald-300 dark:hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-slate-900/5 dark:shadow-emerald-500/10"
         >
           {cmsData.ctaText}
         </a>
