@@ -26,12 +26,14 @@ export default async function LandingPage() {
   );
 
   return (
-    <section className="space-y-16 py-12">
+    <section className="space-y-16 py-12 bg-white dark:bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <div className="text-center max-w-3xl mx-auto space-y-6">
         <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent leading-tight">
           {cmsData.heroTitle}
         </h1>
-        <p className="text-lg text-slate-400 leading-relaxed">{cmsData.heroSubtitle}</p>
+        <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+          {cmsData.heroSubtitle}
+        </p>
         <a
           href="#newsletter"
           className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-6 py-3 rounded-lg transition shadow-lg shadow-emerald-500/10"
@@ -41,51 +43,64 @@ export default async function LandingPage() {
       </div>
 
       {/* Live Stats */}
-      <div className="border-y border-slate-900/60 py-10 space-y-6">
+      <div className="border-y border-slate-200 dark:border-slate-900/60 py-10 space-y-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-slate-100">Live Subscribers</h2>
-          <p className="text-slate-400 text-sm mt-1">Satisfied Clients</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+            Live Subscribers
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Satisfied Clients</p>
         </div>
         <LiveStats />
       </div>
 
       <div className="max-w-4xl mx-auto space-y-8 pt-6">
-        <h2 className="text-2xl font-bold text-center text-slate-100">Services</h2>
+        <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-slate-100">
+          Services
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {cmsData.useCases.map((uc) => (
             <div
               key={uc.id}
-              className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm"
+              className="p-6 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-lg backdrop-blur-sm"
             >
-              <h3 className="text-lg font-semibold text-emerald-400 mb-2">{uc.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{uc.description}</p>
+              <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+                {uc.title}
+              </h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {uc.description}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Testimonials */}
-      <div className="max-w-4xl mx-auto space-y-8 pt-6 border-t border-slate-900/60">
-        <h2 className="text-2xl font-bold text-center text-slate-100 pt-6">
+      <div className="max-w-4xl mx-auto space-y-8 pt-6 border-t border-slate-200 dark:border-slate-900/60">
+        <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-slate-100 pt-6">
           What our customers say
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="p-6 bg-slate-900/40 border border-slate-800/80 rounded-lg backdrop-blur-sm flex flex-col justify-between"
+              className="p-6 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-lg backdrop-blur-sm flex flex-col justify-between"
             >
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 &ldquo;{testimonial.review}&rdquo;
               </p>
-              <p className="text-sm font-semibold text-emerald-400 mt-4">{testimonial.name}</p>
+              <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-4">
+                {testimonial.name}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Newsletter */}
-      <div id="newsletter" className="scroll-mt-20 border-t border-slate-900/60 pt-12">
+      <div
+        id="newsletter"
+        className="scroll-mt-20 border-t border-slate-200 dark:border-slate-900/60 pt-12"
+      >
         <NewsletterForm />
       </div>
 

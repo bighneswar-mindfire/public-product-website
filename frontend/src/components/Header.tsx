@@ -5,6 +5,7 @@ import { useAuth } from "@/auth/Providers";
 import { signOut } from "firebase/auth";
 import { auth } from "@/auth/firebase";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Header() {
   const { user } = useAuth();
@@ -49,6 +50,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4 text-sm">
+          <ThemeToggle />
           {user ? (
             <>
               <button
