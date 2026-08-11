@@ -16,7 +16,7 @@ export default async function FeaturesPage() {
     <div className="space-y-8 py-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Facilities we provide</h1>
-        <p className="text-slate-400 max-w-xl mx-auto text-sm">
+        <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto text-sm">
           We offer a diverse range of vehicles to cater to different logistics needs, ensuring
           efficient and reliable transportation.
         </p>
@@ -26,10 +26,14 @@ export default async function FeaturesPage() {
         {features.map((item) => (
           <div
             key={item.id}
-            className="p-6 bg-slate-900/40 border border-slate-800 rounded-lg hover:border-emerald-500/20 transition duration-300"
+            className="p-6 bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-emerald-500/40 dark:hover:border-emerald-500/20 transition duration-300"
           >
-            <h3 className="text-xl font-semibold mb-3 text-emerald-400">{item.title}</h3>
-            <p className="text-sm text-slate-400 leading-relaxed">{item.description}</p>
+            <h3 className="text-xl font-semibold mb-3 text-emerald-600 dark:text-emerald-400">
+              {item.title}
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>

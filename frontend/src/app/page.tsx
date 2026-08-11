@@ -26,7 +26,7 @@ export default async function LandingPage() {
   );
 
   return (
-    <section className="space-y-16 py-12 bg-white dark:bg-transparent text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <section className="space-y-16 py-12">
       <div className="text-center max-w-3xl mx-auto space-y-6">
         <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent leading-tight">
           {cmsData.heroTitle}
